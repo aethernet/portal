@@ -1,0 +1,14 @@
+version: "2.1"
+
+volumes:
+  videos:
+
+services:
+  gst-playground:
+    restart: always
+    build: ./gst-playground
+    privileged: true # run in privileged mode for easy access to soundcards and cameras
+    volumes:
+      - videos:/videos/
+    expose:
+      - 8000

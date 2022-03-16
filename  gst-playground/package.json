@@ -1,0 +1,25 @@
+{
+    "name": "gst-playground",
+    "version": "1.0.0",
+    "description": "GST Pipeline Explorer",
+    "main": "main.js",
+    "engines": {
+        "node": ">=16.14.0"
+    },
+    "private": true,
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon /usr/src/main.js",
+        "start": "node /usr/src/main.js"
+    },
+    "author": "Edwin Joassart",
+    "license": "MIT",
+    "dependencies": {
+        "body-parser": "^1.19.1",
+        "express": "^4.17.2",
+        "gstreamer-superficial": "^1.7.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.15"
+    }
+}
