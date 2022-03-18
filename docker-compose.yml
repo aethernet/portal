@@ -2,6 +2,7 @@ version: "2.1"
 
 volumes:
   videos:
+  x11:
 
 services:
   gst-playground:
@@ -10,5 +11,27 @@ services:
     privileged: true # run in privileged mode for easy access to soundcards and cameras
     volumes:
       - videos:/videos/
+      - x11:/tmp/.X11-unix
     expose:
       - 8000
+    devices:
+      - /dev/dri
+    group_add:
+      - video
+
+  xserver:
+    image: balenablocks/xserver
+    restart: always
+    privileged: true
+    volumes:
+      - "x11:/tmp/.X11-unix"
+    environment:
+      - CURSOR=false
+
+  file-transfer:
+    restart: always
+    image: ghcr.io/rcooke-warwick/file-transfer:latest
+    volumes:
+      - videos:/data
+    ports:
+      - 80:3000
