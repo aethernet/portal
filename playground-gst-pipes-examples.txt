@@ -1,0 +1,22 @@
+v4l2src device=/dev/video0 do-timestamp=true \
+! image/jpeg,width=1920,height=1080,framerate=30/1 \
+! jpegdec \
+! x264enc qp-min=18 \
+! rtph264pay config-interval=1 pt=96 \
+! udpsink host=192.168.2.35 port=5000
+
+v4l2src device=/dev/video2 do-timestamp=true \
+! image/jpeg,width=1920,height=1080,framerate=30/1 \
+! jpegdec \
+! x264enc qp-min=18 \
+! rtph264pay config-interval=1 pt=96 \
+! udpsink host=192.168.2.35 port=5002
+
+v4l2src device=/dev/video0 \
+! image/jpeg,width=1920,height=1080,framerate=30/1 \
+! jpegdec \
+! videoconvert \
+! x264enc tune=zerolatency \
+! video/x-h264, profile=high \
+! mpegtsmux \
+! srtserversink uri=srt://:8888/
