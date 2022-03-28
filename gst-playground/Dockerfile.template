@@ -11,16 +11,14 @@ ENV UDEV=on
 # Install alsa, ladspa & gstreamer for ALPINE
 RUN install_packages \
     alsa-utils \
-    ladspa \
-    gstreamer \
-    gst-plugins-base \
-    gst-plugins-good \
-    gst-plugins-bad \
-    gst-plugins-ugly \
-    gst-libav \
-    gstreamer-tools \
-    v4l-utils \
-    mkvtoolnix
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-ugly \
+    gstreamer1.0-tools \
+    gstreamer1.0-libav \
+    gstreamer1.0-alsa \
+    v4l-utils
 
 # Copy sources
 COPY . /usr/src/
