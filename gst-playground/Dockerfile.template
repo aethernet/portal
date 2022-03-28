@@ -1,28 +1,9 @@
 ARG BALENA_ARCH=%%BALENA_ARCH%%
 
-FROM balenalib/$BALENA_ARCH-ubuntu-node:latest AS BUILDER
-
-# INSTALL NODE SERVER & API
-ENV PYTHONUNBUFFERED=1
-RUN install_packages python3 && ln -sf python3 /usr/bin/python
-RUN python3 -m ensurepip
-RUN pip3 install --no-cache --upgrade pip setuptools
-
-RUN install_packages \
-    gstreamer-dev \
-    gst-plugins-base-dev \
-    alpine-sdk \
-    make
-
-WORKDIR /usr/src
-COPY ./package.json /usr/src/package.json
-RUN npm install --only=production
-
-FROM balenalib/$BALENA_ARCH-alpine-node:latest
+FROM balenalib/$BALENA_ARCH-ubuntu-node:latest
 
 # get node modules from BUILDER stage
 WORKDIR /usr/src
-COPY --from=BUILDER /usr/src/node_modules/ ./node_modules
 
 # UDev is required to autodetect ALSA devices
 ENV UDEV=on
