@@ -28,7 +28,7 @@ Another mic is plugged to the soundcard to provide a technical audio channel bet
 
 ![Overview Diagram](portal-overview.png "overview")
 
-# Technical choices
+## Technical choices
 ### Constraints
 We want the system to be :
 	- HQ A/V
@@ -76,8 +76,6 @@ GStreamer is notoriously complex to use, with hard to read documentation and con
 
 So to make it easier to setup and test, a new balena project called "gst-playground" will be developed. It will contains a fully functional installation of gstreamer with gstshark and some visualising tools to help debug.
 
-Room size multicam zoom-like system to bridge music club - based on balena
-
-## Live build logs
+### Live build logs
 
 https://docs.google.com/document/d/1YtqM9IKC1RARrwvitG2_fHyDRxGGfLRCbiqlT5SFSPg
