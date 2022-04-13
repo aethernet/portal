@@ -5,19 +5,37 @@ volumes:
   x11:
 
 services:
-  gst-playground:
+  potal-receiver:
+    image: portal
     restart: always
-    build: ./gst-playground
+    build: ./portal
     privileged: true # run in privileged mode for easy access to soundcards and cameras
     volumes:
       - videos:/videos/
       - x11:/tmp/.X11-unix
-    expose:
-      - 8000
     devices:
       - /dev/dri
     group_add:
       - video
+    environment:
+      - SENDER_OR_RECEIVER=receiver
+
+  potal-sender:
+    restart: always
+    build: ./portal
+    privileged: true # run in privileged mode for easy access to soundcards and cameras
+    volumes:
+      - videos:/videos/
+      - x11:/tmp/.X11-unix
+    ports:
+      - "8888:8888/udp"
+      - "8888:8888/tcp"
+    devices:
+      - /dev/dri
+    group_add:
+      - video
+    environment:
+      - SENDER_OR_RECEIVER=sender
 
   xserver:
     image: balenablocks/xserver
@@ -27,11 +45,3 @@ services:
       - "x11:/tmp/.X11-unix"
     environment:
       - CURSOR=false
-
-  file-transfer:
-    restart: always
-    image: ghcr.io/rcooke-warwick/file-transfer:latest
-    volumes:
-      - videos:/data
-    ports:
-      - 80:3000
