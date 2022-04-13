@@ -1,0 +1,57 @@
+ARG BALENA_ARCH=%%BALENA_ARCH%%
+
+FROM balenalib/$BALENA_ARCH-ubuntu-node:latest AS BUILDER
+
+# We'll need python to build our node modules
+ENV PYTHONUNBUFFERED=1
+RUN install_packages python3 && ln -sf python3 /usr/bin/python
+
+# Other dependencies and build tools
+RUN install_packages \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    build-essential \
+    make
+
+WORKDIR /usr/src
+COPY ./package.json /usr/src/package.json
+RUN npm install --only=production
+
+FROM balenalib/$BALENA_ARCH-ubuntu-node:latest
+
+# get node modules from BUILDER stage
+WORKDIR /usr/src
+COPY --from=BUILDER /usr/src/node_modules/ ./node_modules
+
+# UDev is required to autodetect ALSA devices
+ENV UDEV=on
+
+# Install alsa, video4linux and gstreamer
+RUN install_packages \
+    alsa-utils \
+    v4l-utils
+
+RUN install_packages \ 
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libgstreamer-plugins-bad1.0-dev \ 
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-ugly \
+    gstreamer1.0-libav \
+    gstreamer1.0-doc \
+    gstreamer1.0-tools \
+    gstreamer1.0-x \
+    gstreamer1.0-alsa \
+    gstreamer1.0-gl \
+    gstreamer1.0-gtk3 \
+    gstreamer1.0-qt5 \
+    gstreamer1.0-pulseaudio
+
+# Copy sources
+COPY . /usr/src/
+WORKDIR /usr/src
+
+# Start
+CMD [ "/bin/bash", "/usr/src/start.sh" ]

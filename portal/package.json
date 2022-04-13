@@ -1,0 +1,23 @@
+{
+  "name": "portal",
+  "version": "0.1.0",
+  "description": "Portal",
+  "main": "server.js",
+  "engines": {
+    "node": ">=16.14.0"
+  },
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon /usr/src/server.js",
+    "start": "node /usr/src/server.js"
+  },
+  "author": "Edwin Joassart",
+  "license": "ISC",
+  "dependencies": {
+    "gstreamer-superficial": "^1.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
