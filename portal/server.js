@@ -95,7 +95,7 @@ const getStatus = () => {
 if (!["receiver", "sender"].includes(process.env.SENDER_OR_RECEIVER))
   throw Error("This service doesn't know if it's a sender or receiver, please set SENDER_OR_RECEIVER env var to either 'receiver' or 'sender'")
 
-const IS_SENDER = process.env.SENDER_OR_RECEIVER === "sender"
+const IS_SENDER = process.env.SENDER_OR_RECEIVER === "sender" // must be set in the docker-compose file to distinguish sender and receiver services
 
 const params = {
   DISPLAY: process.env.DISPLAY, // only usefull for receiver, this is set by the start script, and shoulnd't be overriden
@@ -104,8 +104,8 @@ const params = {
   CAM_ENCODER: process.env.CAM_ENCODER ?? "MJPEG", // only usefull for sender
   CAM_PIPE: process.env.CAM_PIPE ?? undefined, // default undefined, only usefull for sender, only usefull if no CAM_ENCODER is set
   AUDIO_DEVICE: process.env.AUDIO_DEVICE ?? "plughw:3,0", // both receiver and sender (might be different)
-  AUDIO_CHANNELS: process.env.AUDIO_CHANNELS ?? 2, // only usefull for sender
-  SENDER_IP: process.env.SENDER_IP ?? "192.168.2.38", // only usefull for receiver
+  AUDIO_CHANNELS: process.env.AUDIO_CHANNELS ?? 2, // only usefull for sender, it is automatic for receiver (will match the sender)
+  SENDER_IP: process.env.SENDER_IP ?? "192.168.2.38", // only usefull for receiver (must be the ip of the sender)
 }
 
 console.log("Will start as ", IS_SENDER ? "sender" : "receiver")
