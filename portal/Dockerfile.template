@@ -29,7 +29,8 @@ ENV UDEV=on
 # Install alsa, video4linux and gstreamer
 RUN install_packages \
     alsa-utils \
-    v4l-utils
+    v4l-utils \
+    x11-xserver-utils
 
 RUN install_packages \ 
     libgstreamer1.0-dev \
