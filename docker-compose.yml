@@ -1,17 +1,15 @@
 version: "2.1"
 
 volumes:
-  videos:
   x11:
 
 services:
   potal-receiver:
     image: portal
-    restart: always
     build: ./portal
+    restart: always
     privileged: true # run in privileged mode for easy access to soundcards and cameras
     volumes:
-      - videos:/videos/
       - x11:/tmp/.X11-unix
     devices:
       - /dev/dri
@@ -21,11 +19,10 @@ services:
       - SENDER_OR_RECEIVER=receiver
 
   potal-sender:
-    restart: always
     build: ./portal
+    restart: always
     privileged: true # run in privileged mode for easy access to soundcards and cameras
     volumes:
-      - videos:/videos/
       - x11:/tmp/.X11-unix
     ports:
       - "8888:8888/udp"
@@ -35,7 +32,7 @@ services:
     group_add:
       - video
     environment:
-      - SENDER_OR_RECEIVER=sender
+      - SENDER_OR_RECEIVER = sender
 
   xserver:
     image: balenablocks/xserver
