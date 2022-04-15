@@ -89,7 +89,7 @@ demux. \
 ! queue \
 ! h264parse \
 ! video/x-h264 ! avdec_h264 \
-! xvimagesink display=:2 \
+! xvimagesink display=:0 \
 demux. \
 ! queue \
 ! avdec_aac \
@@ -104,7 +104,7 @@ compositor name=comp sink_0::xpos=0 sink_0::ypos=0 sink_0::width=1920 sink_0::he
 ! x264enc \
   tune=zerolatency \
   speed-preset=superfast \
-  bitrate=2000 \
+  bitrate=6000 \
   byte-stream=true \
   key-int-max=15 \
   intra-refresh=true \

@@ -294,3 +294,24 @@ Even at 1080p, decoding MJPEG at 30fps is a process intensive tasks for a SBC.
 As explained in previous section, even with hardware acceleration, the Jetson nano was choking on it.
 
 A better choice would have been to use cameras with an h.264 hardware encoder included.
+
+## Known Bugs and Limitations
+
+### No room to store incoming packet
+
+`potal-receiver 07:06:37.140388/SRT:RcvQ:worker\*E:SRT.c: %231187076:No room to store incoming packet: offset=0 avail=0 ack.seq=1308217033 pkt.seq=1308217033 rcv-remain=8191``
+
+Currently when the `receiver` connects to a running `sender` there's a high risk of a freezed image with this error flooding on `receiver` side.
+
+Solution is to restart the `sender`.
+
+It looks like some `buffer` is too small on `receiver` to accept the influx of data on initial connection if the `sender buffer` is already full.
+
+One hypothesis would be to add `leaky=downstream` to the first `queue` on the receiver side. This might have unintended side effects, it needs to be carefully evaluated.
+Effect would be to drop older data from the queue to make room for the new one; hypothesis is that the rest of the pipe is not ready yet to process the data that is already comming in and that we won't have this issue when everything is running.
+
+### git submodules for `NetdataBlock` and `mdns-advertise`
+
+Those `blocks` are not currently available on balenahub for `x86`. But nothing prevent them to be built for this platform, so until balenahub supports multiplatform or those blocks are uploaded for x86, we'll build them ourself.
+
+Remedy would be to provide those blocks for x86 ourself, which we actually might do.

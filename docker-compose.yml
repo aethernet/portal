@@ -11,6 +11,8 @@ services:
     build: ./portal
     restart: always
     privileged: true # run in privileged mode for easy access to soundcards and cameras
+    depends_on:
+      - xserver
     volumes:
       - x11:/tmp/.X11-unix
     devices:
@@ -46,7 +48,8 @@ services:
       - CURSOR=false
 
   netdata:
-    image: bh.cr/gh_odyslam/netdatablock
+    #image: bh.cr/gh_odyslam/netdatablock
+    build: ./NetdataBlock/netdata
     privileged: true
     ports:
       - "19999:19999"
@@ -64,7 +67,8 @@ services:
       - netdatacache:/var/cache/netdata
 
   mdns-advertise:
-    image: bh.cr/gh_nucleardreamer/mdns-advertise
+    #image: bh.cr/gh_nucleardreamer/mdns-advertise
+    build: ./mdns-advertise
     restart: "always"
     privileged: true
     network_mode: host
