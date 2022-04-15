@@ -315,3 +315,10 @@ Effect would be to drop older data from the queue to make room for the new one; 
 Those `blocks` are not currently available on balenahub for `x86`. But nothing prevent them to be built for this platform, so until balenahub supports multiplatform or those blocks are uploaded for x86, we'll build them ourself.
 
 Remedy would be to provide those blocks for x86 ourself, which we actually might do.
+
+### audio device id
+
+Over reboot the id of an alsa audio device is somehow unpredictable and depends on multiple factors, such as what are the other devices connected and the port they are connected to.
+
+Remedy is to set `UDEV` rules to give predictable names to certain devices.
+This requires some knowledge and predictability about either the device or the port it will be connected to.
