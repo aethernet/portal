@@ -31,7 +31,7 @@ A sound card is connected to mixer table on each side as capture of the mix and 
 A mic is plugged to the soundcard to capture ambiance.
 Another mic is plugged to the soundcard to provide a technical audio channel between technicians.
 
-![Overview Diagram](portal-overview.png "overview")
+![Overview Diagram](https://github.com/aethernet/portal/blob/c982d3df1f7cc3cf27bc65a450b2c84ed65404b5/docs/assets/portal-arch.png "overview")
 
 ## Technical choices
 
