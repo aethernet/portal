@@ -186,15 +186,12 @@ We'll drop the [`netdata`](https://hub.balena.io/gh_odyslam/netdatablock) `block
 
 We'll eventually have those services running on the device (each service is a container) :
 
-[x] `portal-receiver` (./portal)
-[x] `portal-sender` (./portal)
-[ ] `zerotier` (./zerotier)
-[x] `xserver` (balenablocks/xserver)
-[x] `mdns-advertise` (bh.cr/gh_nucleardreamer/mdns-advertise)
-[x] `netdata` (bh.cr/gh_odyslam/netdatablock)
-
-TODO: insert here the architecture schema
-![[./docs/assets/portal-arch.png]]
+- [x] `portal-receiver` (./portal)
+- [x] `portal-sender` (./portal)
+- [ ] `zerotier` (./zerotier)
+- [x] `xserver` (balenablocks/xserver)
+- [x] `mdns-advertise` (bh.cr/gh_nucleardreamer/mdns-advertise)
+- [x] `netdata` (bh.cr/gh_odyslam/netdatablock)
 
 ## GStreamer
 
@@ -266,12 +263,12 @@ TODO: insert here a graphical representation of the pipeline
 
 ### TODO
 
-[ ] Camera Type autodection
-[ ] Camera quantity and layout auto-setup
-[ ] Size and Framerate parameters
-[ ] GUI
-[ ] Properly test a 4 audio channels setup
-[ ] Publish a proper `GStreamer-sandbox` & `GStreamer` blocks on balenahub
+- [ ] Camera Type autodection
+- [ ] Camera quantity and layout auto-setup
+- [ ] Size and Framerate parameters
+- [ ] GUI
+- [ ] Properly test a 4 audio channels setup
+- [ ] Publish a proper `GStreamer-sandbox` & `GStreamer` blocks on balenahub
 
 ## Live build logs
 
